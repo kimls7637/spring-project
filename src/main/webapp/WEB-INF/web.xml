@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://Java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <!-- 서블릿을 만들었기때문에 코드들 생긴것 -->
+   <servlet>
+   <!-- 사용자의 설명같은 거라 지워도됨, 필수태그 X <description></description> 
+    필수태그 X <display-name>DispatcherServlet</display-name> -->
+    <!-- com.spring.controller.DispatcherServlet: 내가만든 DS, 지금 삭제해서 쓸수없음 -->
+    <!-- !!!!!!!!new할수있게 되고 출처가 스프링에서 제공하는 출신이다.
+    new할때 참고하는 파일이 WEB-INF 하위에있는 파일이다-->
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <filter>
+  	<!-- 이름은 내가 정한것 나머지는 정해진 값 사용 -->
+     <filter-name>encFilter</filter-name>
+     <!-- 스프링에서 제공하는 필터, 그중에서도 인코딩 필터 쓸래 -->
+     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+     <!-- 인자값 넘겨주기(이름 정확하게) -->
+     <init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+     </init-param>
+  </filter>
+  <!-- 뭐에 대해 적용할건지 작성 -->
+  <filter-mapping>
+     <filter-name>encFilter</filter-name>
+     <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+     <filter-name>encFilter</filter-name>
+     <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
+   <filter-name>xssEscapeServletFilter</filter-name>
+   <filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
+</filter>
+<filter-mapping>
+   <filter-name>xssEscapeServletFilter</filter-name>
+   <url-pattern>/*</url-pattern>
+</filter-mapping>
+    <context-param>
+     <param-name>contextConfigLocation</param-name>
+     <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+</web-app>

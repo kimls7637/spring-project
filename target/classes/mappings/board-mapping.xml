@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatBis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDAO">
+
+   <insert id="insertBoard">
+      INSERT INTO BOARD2(BTITLE, BCONTENT, BCATE, BID) VALUES (#{bTitle},#{bContent},#{bCate},#{bId})
+   </insert>
+
+   <update id="updateBoard">
+      UPDATE BOARD2 SET BTITLE=#{bTitle},BCONTENT=#{bContent},BCATE=#{bCate} WHERE BNUM=#{bNum}
+   </update>
+   
+   <update id="updateBoard_hits">
+      UPDATE BOARD2 SET BHITS=BHITS+1 WHERE BNUM=#{bNum}
+   </update>
+   
+   <update id="updateBoard_blind">
+      UPDATE BOARD2 SET BLIND=TRUE WHERE BNUM=#{bNum}
+   </update>
+   
+   <update id="updateBoard_blind_member">
+      UPDATE BOARD2 SET BLIND=TRUE WHERE BID=#{bId};
+   </update>
+   
+   <delete id="deleteBoard">
+      DELETE 
+      FROM BOARD2 
+      WHERE 1=1
+      <if test="bId==null">
+       AND BNUM=#{bNum}
+      </if>
+      <if test="bId!=null">
+         AND BID=#{bId}
+      </if>
+   </delete>
+   
+</mapper>

@@ -1,0 +1,34 @@
+div.paginate{
+    padding: 5px 0px;
+    margin: auto;
+
+}
+div.paginate input[type='button']:hover{
+    cursor: pointer;
+}
+div.paginate input[type='button']{
+    margin: 0px 2px;
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    outline: none;
+    color:white;
+}
+
+div.paginate input[type='button'].active{
+    color: #fff;
+    font-weight: bold;
+}
+div.paginate input[type='button']:disabled{
+    cursor: not-allowed;
+}
+
+div.paginate input[type='number']#paginate_page_to_go{
+    max-width: 3rem;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgba(128, 128, 128, 0.65);
+    padding: 3px;
+}
